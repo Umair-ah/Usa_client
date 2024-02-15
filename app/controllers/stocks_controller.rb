@@ -1,5 +1,7 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
+  before_action :set_product
+
   before_action :authenticate_admin!
 
   def index
@@ -17,7 +19,7 @@ class StocksController < ApplicationController
   end
 
   def create
-    @stock = Stock.new(stock_params)
+    @stock = @product.stocks.new(stock_params)
 
     respond_to do |format|
       if @stock.save
@@ -47,6 +49,10 @@ class StocksController < ApplicationController
   end
 
   private
+    def set_product
+      @product = Product.find(params[:product_id])
+    end
+
     def set_stock
       @stock = Stock.find(params[:id])
     end
