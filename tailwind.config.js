@@ -6,5 +6,6 @@ module.exports = {
     "./app/javascript/**/*.js",
     "./node_modules/flowbite/**/*.js",
   ],
+
   plugins: [require("flowbite/plugin")],
 };
