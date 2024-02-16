@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   devise_for :admins, skip: [:registrations]
   devise_for :users
   
-  resources :categories
-  resources :products do
-    resources :stocks
+
+  namespace :admin do
+    resources :categories
+    resources :products do
+      resources :stocks
+    end
   end
 
   authenticated :admin do
