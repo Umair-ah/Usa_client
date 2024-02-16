@@ -12,15 +12,18 @@ Rails.application.routes.draw do
   end
 
   authenticated :admin do
-    root to: "products#index", as: :admin_root
+    root to: "admin/categories#index", as: :admin_root
   end
 
 
 
+
+
   root "homes#index"
+  get "cart/:cart_id", to: "carts#show", as: :cart
 
-  get "garments" => "homes#garment"
+  get "products" => "products#index"
 
-  post "product/:product_id" => "line_items#add_to_cart"
+  post "product/:product_id" => "line_items#add_to_cart", as: "add_to_cart"
 
 end
