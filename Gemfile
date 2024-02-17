@@ -77,3 +77,5 @@ end
 gem "devise"
 gem 'pincode_validator'
 gem "phonelib", "~> 0.8.7"
+
+gem 'indian_postal_codes'

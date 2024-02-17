@@ -15,7 +15,7 @@
 
   <div>
     <%= f.label :phone_number %>
-    <%= f.phone_field :phone_number %>
+    <%= f.phone_field :phone_number, min: 10, max: 10 %>
   </div>
 
   <div class="field">
