@@ -22,7 +22,10 @@ Rails.application.routes.draw do
   root "homes#index"
   get "cart/:cart_id", to: "carts#show", as: :cart
 
-  get "products" => "products#index"
+  resources :products
+
+  post "size/:product_id" => "line_items#size", as: "size_select"
+
 
   post "product/:product_id" => "line_items#add_to_cart", as: "add_to_cart"
 
