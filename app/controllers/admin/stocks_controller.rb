@@ -23,7 +23,7 @@ class Admin::StocksController < ApplicationController
 
     respond_to do |format|
       if @stock.save
-        format.html { redirect_to admin_stock_url(@stock), notice: "Stock was successfully created." }
+        format.html { redirect_to admin_product_stocks_url(@product), notice: "Stock was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end

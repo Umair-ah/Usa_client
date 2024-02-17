@@ -27,6 +27,12 @@ Rails.application.routes.draw do
   post "size/:product_id" => "line_items#size", as: "size_select"
 
 
-  post "product/:product_id" => "line_items#add_to_cart", as: "add_to_cart"
+  post "product/:product_id/:stock_id" => "line_items#add_to_cart", as: "add_to_cart"
+
+  post "add/:product_id/:stock_id" => "line_items#add_quantity", as: :add_quantity
+  post "subtract/:product_id/:stock_id" => "line_items#subtract_quantity", as: :subtract_quantity
+  post "remove/:product_id/:stock_id" => "line_items#destroy_from_cart", as: :destroy_from_cart
+
+
 
 end

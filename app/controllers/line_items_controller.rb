@@ -1,5 +1,64 @@
 class LineItemsController < ApplicationController
 
+
+  def destroy_from_cart
+    @product = Product.find(params[:product_id])
+    @stock_of_selected_product = @product.stocks.find(params[:stock_id])
+    @line_item = @current_cart.line_items.find_by(product_id: @product, stock_id: @stock_of_selected_product)
+    @line_item.destroy
+    flash[:alert] = "Removed #{@product.name}"
+    respond_to do |format|
+      format.turbo_stream{
+        render turbo_stream:
+        turbo_stream.update(
+          "cart",
+          partial:"carts/cart",
+        )
+      }
+    end
+  end
+
+  def add_quantity
+    @product = Product.find(params[:product_id])
+    @stock_of_selected_product = @product.stocks.find(params[:stock_id])
+    @line_item = @current_cart.line_items.find_by(product_id: @product, stock_id: @stock_of_selected_product)
+
+    if @stock_of_selected_product.available?
+      @line_item.quantity += 1
+      @line_item.save
+    else
+      @line_item.destroy
+      flash[:alert] = "Out Of Stock"
+    end
+    respond_to do |format|
+      format.turbo_stream{
+        render turbo_stream:
+        turbo_stream.update(
+          "cart",
+          partial:"carts/cart",
+        )
+      }
+    end
+  end
+
+
+  def subtract_quantity
+    @product = Product.find(params[:product_id])
+    @stock_of_selected_product = @product.stocks.find(params[:stock_id])
+    @line_item = @current_cart.line_items.find_by(product_id: @product, stock_id: @stock_of_selected_product)
+    if @stock_of_selected_product.available?
+      @line_item.quantity -= 1
+      if @line_item.quantity == 0
+        @line_item.destroy
+      end
+      @line_item.save
+    else
+      @line_item.destroy
+      flash[:alert] = "Out Of Stock"
+    end
+    redirect_to cart_path(@current_cart)
+  end
+
   def size
     @product = Product.find(params[:product_id])
     @stock_of_selected_product = @product.stocks.find(params[:stock_id])
@@ -30,18 +89,26 @@ class LineItemsController < ApplicationController
 
   def add_to_cart
     @selected_product = Product.find(params[:product_id])
-    if @current_cart.products.include?(@selected_product)
-      @line_item = @current_cart.line_items.find_by(product_id: @selected_product)
+    @stock_of_selected_product = @selected_product.stocks.find(params[:stock_id])
+  
+    @line_item = @current_cart.line_items.find_by(product_id: @selected_product, stock_id: @stock_of_selected_product)
+  
+    if @line_item
       flash.now[:notice] = "Item is already in cart"
     else
-      @line_item = LineItem.new
-      @line_item.cart = @current_cart
-      @line_item.product = @selected_product
-      @line_item.save
-      flash.now[:notice] = "Item added to cart"
+      if @stock_of_selected_product.available?
+        @line_item = LineItem.new
+        @line_item.cart = @current_cart
+        @line_item.product = @selected_product
+        @line_item.stock = @stock_of_selected_product
+        @line_item.save
+        flash.now[:notice] = "Item added to cart"
+      end
     end
+  
     redirect_to cart_path(@current_cart)
   end
+  
 
   
 end
