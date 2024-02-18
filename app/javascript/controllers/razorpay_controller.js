@@ -29,9 +29,16 @@ export default class extends Controller {
           payment_id: response.razorpay_payment_id,
           order_id: response.razorpay_order_id,
           signature: response.razorpay_signature,
+          first_name: document.querySelector("#first_name").value,
+          last_name: document.querySelector("#first_name").value,
+          phoneNumber: document.querySelector("#phone").value,
+          email: document.querySelector("#email").value,
+          pinCode: document.querySelector("#pin").value,
+          address_1: document.querySelector("#address_1").value,
+          address_2: document.querySelector("#address_2").value,
         };
 
-        window.location.href = "http://localhost:3000/success";
+        window.location.href = "http://localhost:3000";
 
         fetch("http://localhost:3000/order", {
           method: "POST",
@@ -76,8 +83,6 @@ export default class extends Controller {
       const phoneNumber = document.querySelector("#phone").value;
       const email = document.querySelector("#email").value;
       const pinCode = document.querySelector("#pin").value;
-      const state = document.querySelector("#state");
-      const city = document.querySelector("#city");
       const address_1 = document.querySelector("#address_1").value;
       const address_2 = document.querySelector("#address_2");
 
@@ -112,9 +117,6 @@ export default class extends Controller {
       } else if (!isPinValid) {
         const errorDiv = document.getElementById("errorContainer");
         errorDiv.innerHTML = errorPinMessage;
-      } else if (!city.value) {
-        const errorDiv = document.getElementById("errorContainer");
-        errorDiv.innerHTML = `please enter your city`;
       } else if (!isAddressValid) {
         const errorDiv = document.getElementById("errorContainer");
         errorDiv.innerHTML = errorAddressMessage;

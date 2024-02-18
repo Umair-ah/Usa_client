@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_17_122902) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_18_125029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_17_122902) do
 
   create_table "line_items", force: :cascade do |t|
     t.bigint "product_id", null: false
-    t.bigint "cart_id", null: false
+    t.bigint "cart_id"
     t.bigint "order_id"
     t.integer "quantity", default: 1
     t.datetime "created_at", null: false
@@ -93,7 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_17_122902) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "status", default: 0
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "first_name"
@@ -105,6 +105,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_17_122902) do
     t.string "city"
     t.string "address_line_1"
     t.string "address_line_2"
+    t.string "razor_payment_id"
+    t.string "razor_order_id"
+    t.string "razor_signature"
+    t.string "district"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

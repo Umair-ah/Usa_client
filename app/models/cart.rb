@@ -2,7 +2,7 @@ class Cart < ApplicationRecord
 
   belongs_to :user, optional: true
 
-  has_many :line_items
+  has_many :line_items, dependent: :nullify
   has_many :products, through: :line_items
 
   def sub_total

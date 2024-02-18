@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   post "/checkout_form", to: "payments#checkout_form", as: :checkout_form
 
   post "/select_payment_option", to: "payments#select_payment_option", as: :select_payment_option
+  post "/order", to: "payments#order", as: :order
 
 
 

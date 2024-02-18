@@ -122,13 +122,11 @@
           </svg>
         </div>
       </div><div id="emailId"></div>
-      <label for="billing-address" class="mt-4 mb-2 block text-sm font-medium">Billing Address</label>
+      <label for="billing-address" class="mt-4 mb-2 block text-sm font-medium">PIN Code</label>
       <div class="flex flex-col sm:flex-row">
-        <%= f.text_field :pin, class:"flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-orange-500 focus:ring-orange-500", id:"pin" %><div id="pinId"></div>
-         <%= f.select :state, options_for_select(Order.new.indian_states), {}, { class: "w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-orange-500 focus:ring-orange-500", id:"state" } %><div id="stateId"></div>
-        <div class="relative flex-shrink-0 sm:w-7/12">
-          <%= f.text_field :city, class:"w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-orange-500 focus:ring-orange-500", id:"city" %><div id="cityId"></div>
-        </div>
+        <%= f.text_field :pin, class:"flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-orange-500 focus:ring-orange-500", id:"pin" %><div id="pinId"></div>
+        <span class="ml-3 text-green-500 font-mono">State & City will be taken Automatically by PIN</span>
+         
       </div>
       <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">Address Line 1</label>
       <div class="relative">
@@ -168,9 +166,9 @@
         <p class="text-2xl font-semibold text-gray-900">&#x20B9;<%= @current_cart.sub_total %></p>
       </div>
     </div>
+    <div id="errorContainer" class="text-red-600 font-bold text-2xl"></div>
     <%= turbo_frame_tag "order_btn" do %>
       Select Payment Method
     <% end %>
-    <div id="errorContainer" class="text-red-600 font-bold text-2xl"></div>
   </div>
 </div>
