@@ -43,6 +43,11 @@ class PaymentsController < ApplicationController
   end
 
   def checkout
+    @current_cart.line_items.each do |line_item|
+      if !line_item.stock.available?
+        line_item.destroy
+      end
+    end
 
   end
 
@@ -55,20 +60,42 @@ class PaymentsController < ApplicationController
       respond_to do |format|
         format.turbo_stream {
           render turbo_stream:
-          turbo_stream.update(
-            "order_btn",
-            partial:"payments/order_btn"
-          )
+          [
+            turbo_stream.update(
+              "order_btn",
+              partial:"payments/order_btn"
+            ),
+            turbo_stream.update(
+              "products_details",
+              partial:"payments/product_details",
+              locals: {current_cart: @current_cart }
+            ),
+            turbo_stream.update(
+              "total_amount",
+              partial:"payments/total_amount"
+            )
+          ]
         }
       end
     else
       respond_to do |format|
         format.turbo_stream {
           render turbo_stream:
-          turbo_stream.update(
-            "order_btn",
-            partial:"payments/cod_btn"
-          )
+          [
+            turbo_stream.update(
+              "order_btn",
+              partial:"payments/cod_btn"
+            ),
+            turbo_stream.update(
+              "products_details",
+              partial:"payments/product_details",
+              locals: {current_cart: @current_cart }
+            ),
+            turbo_stream.update(
+              "total_amount",
+              partial:"payments/total_amount"
+            )
+          ]
         }
       end
 

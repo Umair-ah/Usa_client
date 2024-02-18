@@ -24,8 +24,10 @@ class LineItemsController < ApplicationController
     @line_item = @current_cart.line_items.find_by(product_id: @product, stock_id: @stock_of_selected_product)
 
     if @stock_of_selected_product.available?
-      @line_item.quantity += 1
-      @line_item.save
+      if @line_item.quantity < @stock_of_selected_product.piece
+        @line_item.quantity += 1
+        @line_item.save
+      end
     else
       @line_item.destroy
       flash[:alert] = "Out Of Stock"

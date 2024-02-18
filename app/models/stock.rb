@@ -3,7 +3,7 @@ class Stock < ApplicationRecord
   has_many :line_items
   has_many :products, through: :line_items
 
-  validates :size, uniqueness: true
+  validates :size, uniqueness: true, presence: true
   validates :piece, presence: true
 
   def available?
