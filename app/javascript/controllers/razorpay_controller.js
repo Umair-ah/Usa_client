@@ -55,12 +55,15 @@ export default class extends Controller {
           });
       },
       prefill: {
-        name: "Gaurav Kumar",
-        email: "gaurav.kumar@example.com",
-        contact: "9000090000",
+        name:
+          document.querySelector("#first_name").value +
+          " " +
+          document.querySelector("#last_name").value,
+        email: document.querySelector("#email").value,
+        contact: document.querySelector("#phone").value,
       },
       notes: {
-        address: "Razorpay Corporate Office",
+        address: document.querySelector("#address_1").value,
       },
       theme: {
         color: "#ff5a1f",

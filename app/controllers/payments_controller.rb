@@ -30,6 +30,10 @@ class PaymentsController < ApplicationController
     order.razor_order_id = razor_order_id
     order.razor_signature = razor_signature
 
+    if current_user
+      order.user = current_user
+    end
+
     order.save!
     @current_cart.destroy
     order.line_items.each do |line_item|
