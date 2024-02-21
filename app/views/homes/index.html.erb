@@ -1,0 +1,101 @@
+<header>
+  <div class="w-full bg-center bg-cover h-[38rem]" style="background-image: url('https://www.aeroarmour.store/cdn/shop/files/ARMOUR.jpg?v=1679733634&width=1920');">
+  
+  </div>
+</header>
+
+<div class="border-b border-orange-600 mt-8"></div>
+
+<section>
+  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
+      <div class="grid place-content-center rounded bg-gray-100 p-6 sm:p-8">
+        <div class="mx-auto max-w-md text-center lg:text-left">
+          <header>
+            <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">New Apparels</h2>
+
+            <p class="mt-4 text-gray-500">
+              Discover the latest in fashion with our New Apparels collection, where style meets innovation. 
+            </p>
+          </header>
+
+          <%= link_to "Shop All", products_path, class:"mt-8 inline-block rounded border border bg-orange-500 hover:bg-orange-600 transition:ease-in duration-300 px-12 py-3 text-sm font-medium text-white transition hover:shadow focus:outline-none focus:ring" %>
+
+        </div>
+      </div>
+
+      <div class="lg:col-span-2 lg:py-8">
+        <ul class="grid grid-cols-2 gap-4">
+          <% @recent_products.each do |product| %>
+            <li class="hover:bg-slate-100 transition:ease-in duration-300 border-y border-orange-500 p-6">
+              <%= link_to product_path(product), class:"group block" do %>
+                  <%= image_tag(product.images.first, class:"aspect-square w-full rounded object-cover") %>
+
+                  <div class="mt-3">
+                    <h3
+                      class="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4"
+                    >
+                      <%= product.name %>
+                    </h3>
+
+                    <p class="mt-1 text-sm text-gray-700">&#x20B9;<%= product.price %></p>
+                  </div>
+              <% end %>
+            </li>
+          <% end %>
+      
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="border-b border-orange-600 mt-8"></div>
+
+
+<section>
+  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <header class="text-center">
+      <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">About Us</h2>
+
+      <p class="mx-auto mt-4 max-w-md text-gray-500">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque praesentium cumque iure
+        dicta incidunt est ipsam, officia dolor fugit natus?
+      </p>
+    </header>
+</section>
+
+<div class="border-b border-orange-600 mt-8"></div>
+
+
+<section>
+  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <header>
+      <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">Latest Collections</h2>
+    </header>
+
+
+    <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <% @latest_category_clothes.each do |cloth| %>
+        <li class="hover:bg-slate-100 transition:ease-in duration-300 border-y border-orange-500 p-3">
+          <%= link_to product_path(cloth), class:"group block overflow-hidden" do %>
+            <%= image_tag(cloth.images.first, class:"h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]") %>
+
+            <div class="relative bg-white pt-3">
+              <h3 class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
+                <%= cloth.name %>
+              </h3>
+
+              <p class="mt-2">
+                <span class="sr-only"> Regular Price </span>
+
+                <span class="tracking-wider text-gray-900"> &#x20B9;<%= cloth.price %> </span>
+              </p>
+            </div>
+          
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>

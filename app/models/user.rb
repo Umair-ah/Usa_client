@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :cart
+  has_many :orders
 
   validates :phone_number, phone: { possible: false, allow_blank: true }
 

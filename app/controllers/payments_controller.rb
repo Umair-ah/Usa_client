@@ -1,5 +1,10 @@
 class PaymentsController < ApplicationController
 
+
+  def index
+    @orders = current_user.orders
+  end
+
   def order
     razor_payment_id = params[:payment_id]
     razor_order_id = params[:order_id]

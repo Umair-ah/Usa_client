@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   post "/select_payment_option", to: "payments#select_payment_option", as: :select_payment_option
   post "/order", to: "payments#order", as: :order
 
+  get "orders", to: "payments#index", as: :orders
+
 
 
 

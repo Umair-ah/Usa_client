@@ -13,4 +13,12 @@ class Order < ApplicationRecord
       "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Lakshadweep", "Puducherry"
     ]
   end
+
+  def order_total
+    tot = 0
+    self.line_items.each do |line_item|
+      tot += line_item.total
+    end
+    return tot
+  end
 end
