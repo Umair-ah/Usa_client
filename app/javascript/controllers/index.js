@@ -7,5 +7,8 @@ import { application } from "./application"
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import PinController from "./pin_controller"
+application.register("pin", PinController)
+
 import RazorpayController from "./razorpay_controller"
 application.register("razorpay", RazorpayController)

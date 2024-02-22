@@ -4,6 +4,10 @@ class HomesController < ApplicationController
     @recent_products = Product.order(created_at: :desc).limit(2)
     @category = Category.last
     @latest_category_clothes = @category.products
-    
   end
+
+  def categories
+    @categories = Category.all
+  end
+
 end

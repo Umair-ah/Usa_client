@@ -88,6 +88,7 @@ export default class extends Controller {
       const pinCode = document.querySelector("#pin").value;
       const address_1 = document.querySelector("#address_1").value;
       const address_2 = document.querySelector("#address_2");
+      const pin_details = document.querySelector("#pin_details");
 
       var isPhoneValid = indianPhoneNumberPattern.test(phoneNumber);
       var errorPhoneMessage = isPhoneValid ? "" : "Invalid Phone Number";
@@ -117,6 +118,9 @@ export default class extends Controller {
       } else if (!isEmailValid) {
         const errorDiv = document.getElementById("errorContainer");
         errorDiv.innerHTML = errorMessage;
+      } else if (pin_details.innerHTML == "Invalid Pin") {
+        const errorDiv = document.getElementById("errorContainer");
+        errorDiv.innerHTML = errorPinMessage;
       } else if (!isPinValid) {
         const errorDiv = document.getElementById("errorContainer");
         errorDiv.innerHTML = errorPinMessage;

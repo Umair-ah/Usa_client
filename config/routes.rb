@@ -38,11 +38,14 @@ Rails.application.routes.draw do
 
   get "/checkout", to: "payments#checkout", as: :checkout
   post "/checkout_form", to: "payments#checkout_form", as: :checkout_form
+  post "get_pin", to: "payments#get_pin", as: :get_pin
 
   post "/select_payment_option", to: "payments#select_payment_option", as: :select_payment_option
   post "/order", to: "payments#order", as: :order
 
   get "orders", to: "payments#index", as: :orders
+
+  get "categories", to: "homes#categories", as: :categories
 
 
 

@@ -1,5 +1,11 @@
 class PaymentsController < ApplicationController
 
+  def get_pin
+    pin = params[:pin]
+    details = IndianPostalCodes.details(pin)
+    render json: details
+  end
+
 
   def index
     @orders = current_user.orders
