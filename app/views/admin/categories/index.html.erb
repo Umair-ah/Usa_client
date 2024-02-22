@@ -1,14 +1,17 @@
 <p style="color: green"><%= notice %></p>
+<div class="grid place-items-center">
+  <h1 class="font-extrabold text-slate-700">Categories</h1>
+  <%= link_to "+", new_admin_category_path, class:"font-extraboldtext-center bg-green-500 hover:bg-green-700 transition:ease-in duration-300 px-2 py-1 text-white my-8 rounded-md" %>
 
-<h1>Categories</h1>
+</div>
 
 <div id="categories">
   <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", [:admin, category] %>
-    </p>
+    <div class="bg-slate-100 p-3 my-3">
+
+      <%= render category %>
+ 
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New category", new_admin_category_path %>
