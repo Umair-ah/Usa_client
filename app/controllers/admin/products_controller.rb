@@ -1,13 +1,12 @@
 class Admin::ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ edit update destroy ]
   before_action :authenticate_admin!
 
   def index
     @products = Product.all
   end
 
-  def show
-  end
+  
 
   def new
     @product = Product.new

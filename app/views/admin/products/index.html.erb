@@ -1,17 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Products</h1>
+<div class="flex items-center justify-between">
+  <h1 class="font-extrabold text-slate-700 text-2xl">Products</h1>
+  <%= link_to new_admin_product_path, class:"bg-green-500 hover:bg-green-700 transition:ease-out duration-300 text-white px-3 py-2 my-4" do %>
+    <i class="fa-solid fa-shirt"></i>
+    New Product
+  <% end %>
+  
+</div>
 
 <div id="products">
   <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", [:admin, product] %>
-    </p>
-    <p>
-      <%= link_to  "Edit Stock", admin_product_stocks_path(product) %>
-    </p>
+    <div class="bg-slate-100 p-3 my-3">
+      <%= render product %>
+    </div>
+     
   <% end %>
 </div>
 
-<%= link_to "New product", new_admin_product_path %>

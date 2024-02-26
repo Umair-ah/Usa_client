@@ -1,22 +1,36 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Category:</strong>
-    <%= product.category.name %>
-  </p>
+<div id="<%= dom_id product %>" class="flex items-center justify-between">
+  <div class="">
+    <p class="text-slate-800 font-bold">
+      <%= product.name %>
+    </p>
+    <p class="text-slate-400">
+      <%= product.category.name %>
+    </p>
+    <p class="text-slate-800 font-bold">
+      &#x20B9;<%= product.price %>
+      <%= link_to edit_admin_product_path(product), class:"text-red-700 px-3 py-2 hover:text-red-800 transition:ease-out duration-300" do %>
+        <i class="fa-solid fa-pencil"></i>
+      <% end %>
+    </p>
 
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
+  <div>
+    <%= image_tag(product.images.first, class:"w-20") %>
+  </div>
 
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
+  <div>
+    
+  </div>
+
+  <div>
+    <%= link_to admin_product_stocks_path(product), class:"bg-orange-500 text-white px-3 py-2 hover:bg-orange-700 transition:ease-out duration-300" do %>
+      <i class="fa-solid fa-layer-group"></i>
+      Stocks
+    
+    <% end %>
+    
+  </div>
+
 
 </div>
