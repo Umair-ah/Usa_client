@@ -1,8 +1,7 @@
-<div id="<%= dom_id color %>">
-  <p>
-    <strong>Name:</strong>
+<div id="<%= dom_id color %>" class="flex items-center justify-between px-10 mt-4">
+  <p class="font-mono">
     <%= color.name %>
   </p>
-  <%= link_to "Stock", admin_product_color_stocks_path(@product, color) %>
+  <%= link_to "Stock", admin_product_color_stocks_path(@product, color), class:"bg-emerald-700 hover:bg-emerald-800 text-white p-2" %>
 
 </div>

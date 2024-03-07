@@ -1,6 +1,31 @@
 <p style="color: green"><%= notice %></p>
+<div id="<%= dom_id @product %>" class="flex items-center justify-between">
+  <div class="">
+    <p class="text-slate-800 font-bold">
+      <%= @product.name %>
+    </p>
+    <p class="text-slate-400">
+      <%= @product.category.name %>
+    </p>
+    <p class="text-slate-800 font-bold">
+      &#x20B9;<%= @product.price %>
+      <%= link_to edit_admin_product_path(@product), class:"text-red-700 px-3 py-2 hover:text-red-800 transition:ease-out duration-300" do %>
+        <i class="fa-solid fa-pencil"></i>
+      <% end %>
+    </p>
 
-<h1>Colors</h1>
+  </div>
+
+  <div>
+    <%= image_tag(@product.images.first, class:"w-20") %>
+  </div>
+
+</div>
+
+<div class="flex items-center justify-between px-5 py-5 border-y">
+  <h1 class="text-center text-2xl font-extrabold text-slate-800 mt-5">Colors</h1>
+  <%= link_to "New color", new_admin_product_color_path(@product), class:"bg-slate-800 hover:bg-slate-700 text-white p-2" %>
+</div>
 
 <div id="colors">
   <% @colors.each do |color| %>
@@ -8,7 +33,6 @@
   <% end %>
 </div>
 
-<%= link_to "New color", new_admin_product_color_path(@product) %>
 
 
 
