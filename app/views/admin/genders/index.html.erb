@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Genders</h1>
+
+<div id="genders">
+  <% @genders.each do |gender| %>
+    <%= render gender %>
+  <% end %>
+</div>
+
+<%= link_to "New gender", new_admin_gender_path %>

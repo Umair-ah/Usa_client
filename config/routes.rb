@@ -5,8 +5,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   
-
+  
   namespace :admin do
+    resources :genders, except: [:show ]
     resources :categories, except: [:show ]
     resources :products, except: [:show ] do
       resources :stocks
