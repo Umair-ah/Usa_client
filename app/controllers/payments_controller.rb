@@ -64,6 +64,33 @@ class PaymentsController < ApplicationController
       end
     end
 
+    line_items = @current_cart.line_items.map do |item|
+      {
+        quantity: item.quantity,
+        price_data: {
+          product_data: {
+            name: item.product.name,
+            metadata: { product_id: item.product.id, size: item.stock.size, product_stock_id: item.stock.id },
+          },
+          currency: "usd",
+          unit_amount: item.product.price.to_i
+
+        }
+      }
+    end
+
+    Stripe.api_key = 'sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPItOne2lVDSmqxUDZ4ehVJLnqAYErZvimN46h00fYFnRiOL'
+    session = Stripe::Checkout::Session.create({
+                mode: 'payment',
+                line_items: line_items,
+                success_url: 'https://example.com/success',
+                shipping_address_collection: {
+                  allowed_countries: ['US']
+                },
+                ui_mode: 'hosted' # or 'hosted'
+              })
+    redirect_to session.url, allow_other_host: true
+
   end
 
   def razorpay

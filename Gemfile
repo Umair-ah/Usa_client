@@ -80,4 +80,4 @@ gem "phonelib", "~> 0.8.7"
 
 gem 'indian_postal_codes'
 
-gem "razorpay"
+gem "stripe"

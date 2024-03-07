@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   post "remove/:product_id/:stock_id" => "line_items#destroy_from_cart", as: :destroy_from_cart
 
 
-  get "/checkout", to: "payments#checkout", as: :checkout
+  post "/checkout", to: "payments#checkout", as: :checkout
   post "/checkout_form", to: "payments#checkout_form", as: :checkout_form
   post "get_pin", to: "payments#get_pin", as: :get_pin
 

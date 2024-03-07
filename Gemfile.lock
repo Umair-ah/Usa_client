@@ -101,9 +101,6 @@ GEM
     ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    httparty (0.21.0)
-      mini_mime (>= 1.0.0)
-      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -134,7 +131,6 @@ GEM
     mini_mime (1.1.5)
     minitest (5.22.2)
     msgpack (1.7.2)
-    multi_xml (0.6.0)
     net-imap (0.4.10)
       date
       net-protocol
@@ -199,8 +195,6 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.1.0)
-    razorpay (3.2.1)
-      httparty (~> 0.14)
     rdoc (6.6.2)
       psych (>= 4.0.0)
     redis (4.8.1)
@@ -229,6 +223,7 @@ GEM
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.0)
+    stripe (10.11.0)
     thor (1.3.0)
     timeout (0.4.1)
     turbo-rails (2.0.2)
@@ -275,11 +270,11 @@ DEPENDENCIES
   pincode_validator
   puma (~> 5.0)
   rails (~> 7.0.8)
-  razorpay
   redis (~> 4.0)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
+  stripe
   turbo-rails
   tzinfo-data
   web-console
