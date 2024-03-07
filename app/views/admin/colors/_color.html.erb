@@ -1,0 +1,8 @@
+<div id="<%= dom_id color %>">
+  <p>
+    <strong>Name:</strong>
+    <%= color.name %>
+  </p>
+  <%= link_to "Stock", admin_product_color_stocks_path(@product, color) %>
+
+</div>

@@ -2,10 +2,15 @@
 
 <h1>Stocks</h1>
 
+<h2><%= @product.name %>'s stocks</h2>
+
 <div id="stocks">
   <% @stocks.each do |stock| %>
     <%= render stock %>
   <% end %>
 </div>
 
-<%= link_to "New stock", new_admin_product_stock_path(@product) %>
+<%= link_to "New stock", new_admin_product_color_stock_path(@product, @color) %>
+
+<%= link_to "Back", admin_product_colors_path(@product) %>
+

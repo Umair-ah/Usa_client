@@ -1,0 +1,13 @@
+<div class="my-10">
+  <span class="text-slate-600">Sizes in <b class="text-lg text-slate-900"><%= @color_of_selected_product.name %></b></span>
+  <%= form_with(url: size_select_path(@product, @color_of_selected_product), method: :post, class:"mt-2") do |f| %>
+    
+    <% if @color_of_selected_product.stocks.present? %>
+      <% @color_of_selected_product.stocks.each do |stock| %>
+        <%= f.button stock.size, name: 'stock_id', type: "submit", class:"bg-slate-100 px-4 py-2 hover:bg-slate-200 font-bold", value: stock.id if stock.available? %>
+      <% end %>
+    <% else %>
+      <span class="text-red-800 font-bold">Out Of Stock!</span>
+    <% end %>
+  <% end %>
+</div>

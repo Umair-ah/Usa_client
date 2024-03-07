@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :genders, except: [:show ]
     resources :categories, except: [:show ]
     resources :products, except: [:show ] do
-      resources :stocks
+      resources :colors, except: [:show ] do
+        resources :stocks
+      end
     end
   end
 
@@ -27,10 +29,13 @@ Rails.application.routes.draw do
 
   resources :products
 
-  post "size/:product_id" => "line_items#size", as: "size_select"
+  post "color/:product_id" => "line_items#color", as: "color_select"
+
+  post "size/:product_id/:color_id" => "line_items#size", as: "size_select"
 
 
-  post "product/:product_id/:stock_id" => "line_items#add_to_cart", as: "add_to_cart"
+
+  post "product/:product_id/:color_id/:stock_id" => "line_items#add_to_cart", as: "add_to_cart"
 
   post "add/:product_id/:stock_id" => "line_items#add_quantity", as: :add_quantity
   post "subtract/:product_id/:stock_id" => "line_items#subtract_quantity", as: :subtract_quantity

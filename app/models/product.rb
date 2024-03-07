@@ -3,9 +3,11 @@ class Product < ApplicationRecord
   has_rich_text :description
   has_many_attached :images
 
+  has_many :colors
+
   validates :name, :price, presence: true
 
-  has_many :stocks
+  has_many :stocks, through: :colors
 
   has_many :line_items
 end
