@@ -59,11 +59,16 @@
                 </div>
 
                 <div class="my-10">
-                  <span class="text-slate-600">Select Color</span>
-                  <%= form_with(url: color_select_path(@product), method: :post, class:"mt-2") do |f| %>
-                    <% @product.colors.each do |color| %>
-                      <%= f.button color.name, name: 'color_id', type: "submit", class:"bg-slate-100 px-4 py-2 hover:bg-slate-200 font-bold", value: color.id %>
+                  
+                  <% if @product.colors.present? %>
+                    <span class="text-slate-600">Select Color</span>
+                    <%= form_with(url: color_select_path(@product), method: :post, class:"mt-2") do |f| %>
+                      <% @product.colors.each do |color| %>
+                        <%= f.button color.name, name: 'color_id', type: "submit", class:"bg-slate-100 px-4 py-2 hover:bg-slate-200 font-bold", value: color.id %>
+                      <% end %>
                     <% end %>
+                  <% else %>
+                    <p class="text-red-700 font-bold">Out Of Stock!</p>
                   <% end %>
               
                 </div>
@@ -75,6 +80,7 @@
                       <%= turbo_frame_tag "add_to_cart_btn" do %>
                         <div class="w-full text-orange-500 py-2 px-4 font-bold">
                           <div class="flex items-center justify-center">
+                            
                             <div>Select Size</div>
                           </div>
                         </div>

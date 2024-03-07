@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get "cart/:cart_id", to: "carts#show", as: :cart
 
   resources :products
+  resources :categories, only: [:show]
+
 
   post "color/:product_id" => "line_items#color", as: "color_select"
 
