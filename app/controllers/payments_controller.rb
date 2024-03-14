@@ -11,50 +11,45 @@ class PaymentsController < ApplicationController
     @orders = current_user.orders
   end
 
-  def order
-    razor_payment_id = params[:payment_id]
-    razor_order_id = params[:order_id]
-    razor_signature = params[:signature]
-    first_name = params[:first_name]
-    last_name = params[:last_name]
-    phone_number = params[:phoneNumber]
-    email = params[:email]
-    pin_code = params[:pinCode]
-    address_1 = params[:address_1]
-    address_2 = params[:address_2]
-    area_details = IndianPostalCodes.details(pin_code)
-    order = Order.new
-    @current_cart.line_items.each do |line_item|
-      order.line_items << line_item
+  def success
+    order_present = Order.find_by(stripe_session_id: params[:session_id])
+    @session_details = Stripe::Checkout::Session.retrieve(params[:session_id])
+    
+    
+    if order_present
+      puts "Order already exists for session ID: #{params[:session_id]}"
+    else
+      order = Order.new
+      order.stripe_session_id = params[:session_id]
+      order.email = @session_details.customer_details.email
+      order.name = @session_details.customer_details.name
+      order.phone_number = @session_details.customer_details.phone
+      order.city = @session_details.customer_details.address.city
+      order.state = @session_details.customer_details.address.state
+      order.pin = @session_details.customer_details.address.postal_code
+      order.address_line_1 =  @session_details.customer_details.address.line1
+      if @session_details.customer_details.address.line2
+        order.address_line_2 =  @session_details.customer_details.address.line2
+      end
+      @current_cart.line_items.each do |line_item|
+        order.line_items << line_item
+      end
+      
+      if current_user
+        order.user = current_user
+      end
+      
+      order.save!
+      @current_cart.destroy
+      order.line_items.each do |line_item|
+        stock = line_item.stock
+        stock.decrement!(:piece, line_item.quantity)
+      end
+      
+      new_cart = Cart.create
+      session[:cart_id] = new_cart.id
+      @current_cart = new_cart
     end
-    order.first_name = first_name
-    order.last_name = last_name
-    order.phone_number = phone_number
-    order.email = email
-    order.pin = pin_code
-    order.state = area_details[:state]
-    order.city = area_details[:city]
-    order.district = area_details[:district]
-    order.address_line_1 = address_1
-    order.address_line_2 = address_2
-    order.razor_payment_id = razor_payment_id
-    order.razor_order_id = razor_order_id
-    order.razor_signature = razor_signature
-
-    if current_user
-      order.user = current_user
-    end
-
-    order.save!
-    @current_cart.destroy
-    order.line_items.each do |line_item|
-      stock = line_item.stock
-      stock.decrement!(:piece, line_item.quantity)
-    end
-
-    new_cart = Cart.create
-    session[:cart_id] = new_cart.id
-    @current_cart = new_cart
   end
 
   def checkout
@@ -73,7 +68,7 @@ class PaymentsController < ApplicationController
             metadata: { product_id: item.product.id, size: item.stock.size, product_stock_id: item.stock.id },
           },
           currency: "usd",
-          unit_amount: item.product.price.to_i
+          unit_amount: item.product.price.to_i * 100
 
         }
       }
@@ -83,9 +78,13 @@ class PaymentsController < ApplicationController
     session = Stripe::Checkout::Session.create({
                 mode: 'payment',
                 line_items: line_items,
-                success_url: 'https://example.com/success',
+                success_url: CGI.unescape(success_url(session_id: '{CHECKOUT_SESSION_ID}')),
+                cancel_url: cart_url(@current_cart),
                 shipping_address_collection: {
                   allowed_countries: ['US']
+                },
+                phone_number_collection: {
+                  enabled: true
                 },
                 ui_mode: 'hosted' # or 'hosted'
               })

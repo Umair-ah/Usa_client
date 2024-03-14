@@ -22,7 +22,7 @@
 </header>
 <div class="grid min-[300px]:grid-cols-2 md:grid-cols-4 p-2">
   <% @products.each do |product| %>
-    <div class="group my-10 flex w-full max-w-xs flex-col overflow-hidden bg-white border">
+    <div class="group my-10 flex w-full max-w-xs flex-col overflow-hidden bg-white border rounded-md shadow shadow-slate-300">
       <%= link_to product_path(product), class:"relative mx-3 mt-3 flex h-60 overflow-hidden" do %>
         <%= image_tag(product.images.first, class:"peer absolute top-0 right-0 h-full w-full object-cover") %>
         <%= image_tag(product.images.second, class:"peer absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-1000 hover:right-0 peer-hover:right-0") %>
@@ -44,8 +44,8 @@
             <!--<span class="text-sm text-slate-900 line-through">&#x20B9;1699</span> -->
           </p>
         </div>
-        <%= link_to product_path(product), class:"flex items-center justify-center bg-orange-500 px-4 py-2 text-center text-sm font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition:ease-in duration-300" do %>
-          View
+        <%= link_to product_path(product), class:"flex items-center justify-center px-4 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 transition:ease-in duration-300 border-t" do %>
+          <h2 class="text-slate-700">View</h2>
         <% end %>
       </div>
     </div>

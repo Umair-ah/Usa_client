@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   post "get_pin", to: "payments#get_pin", as: :get_pin
 
   post "/select_payment_option", to: "payments#select_payment_option", as: :select_payment_option
-  post "/order", to: "payments#order", as: :order
+  get "/success", to: "payments#success", as: :success
 
   get "orders", to: "payments#index", as: :orders
 

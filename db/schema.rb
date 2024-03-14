@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_07_124322) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_14_121528) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -114,8 +114,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_07_124322) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
     t.string "phone_number"
     t.string "email"
     t.string "pin"
@@ -123,10 +121,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_07_124322) do
     t.string "city"
     t.string "address_line_1"
     t.string "address_line_2"
-    t.string "razor_payment_id"
-    t.string "razor_order_id"
-    t.string "razor_signature"
-    t.string "district"
+    t.string "stripe_session_id"
+    t.string "name"
+    t.index ["stripe_session_id"], name: "index_orders_on_stripe_session_id", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
