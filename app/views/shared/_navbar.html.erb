@@ -1,9 +1,6 @@
 <nav class="bg-transparent border-b border-slate-500 dark:bg-gray-900">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-  <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-    <%= image_tag("orange-turtle.png", class:"h-14") %>
-  </a>
-  <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+  <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse" style="padding-left: 49px;">
     <div class="flex items-center gap-3">
       <div class="relative py-2 hover:cursor-pointer mr-5">
         <%= link_to cart_path(@current_cart) do %>
@@ -63,6 +60,10 @@
     </button>
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <%= image_tag("orange-turtle.png", class:"h-14") %>
+    </a>
+   
     <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <li>
         <%= link_to "Home", root_path, class:"block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-slate-600 md:dark:hover:text-slate-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" %>
