@@ -19,36 +19,39 @@ class PaymentsController < ApplicationController
     if order_present
       puts "Order already exists for session ID: #{params[:session_id]}"
     else
-      order = Order.new
-      order.stripe_session_id = params[:session_id]
-      order.email = @session_details.customer_details.email
-      order.name = @session_details.customer_details.name
-      order.phone_number = @session_details.customer_details.phone
-      order.city = @session_details.customer_details.address.city
-      order.state = @session_details.customer_details.address.state
-      order.pin = @session_details.customer_details.address.postal_code
-      order.address_line_1 =  @session_details.customer_details.address.line1
-      if @session_details.customer_details.address.line2
-        order.address_line_2 =  @session_details.customer_details.address.line2
+      if @session_details.payment_status == "paid"
+        order = Order.new
+        order.stripe_session_id = params[:session_id]
+        order.amount_total = @session_details.amount_total / 100
+        order.email = @session_details.customer_details.email
+        order.name = @session_details.customer_details.name
+        order.phone_number = @session_details.customer_details.phone
+        order.city = @session_details.customer_details.address.city
+        order.state = @session_details.customer_details.address.state
+        order.pin = @session_details.customer_details.address.postal_code
+        order.address_line_1 =  @session_details.customer_details.address.line1
+        if @session_details.customer_details.address.line2
+          order.address_line_2 =  @session_details.customer_details.address.line2
+        end
+        @current_cart.line_items.each do |line_item|
+          order.line_items << line_item
+        end
+        
+        if current_user
+          order.user = current_user
+        end
+        
+        order.save!
+        @current_cart.destroy
+        order.line_items.each do |line_item|
+          stock = line_item.stock
+          stock.decrement!(:piece, line_item.quantity)
+        end
+        
+        new_cart = Cart.create
+        session[:cart_id] = new_cart.id
+        @current_cart = new_cart
       end
-      @current_cart.line_items.each do |line_item|
-        order.line_items << line_item
-      end
-      
-      if current_user
-        order.user = current_user
-      end
-      
-      order.save!
-      @current_cart.destroy
-      order.line_items.each do |line_item|
-        stock = line_item.stock
-        stock.decrement!(:piece, line_item.quantity)
-      end
-      
-      new_cart = Cart.create
-      session[:cart_id] = new_cart.id
-      @current_cart = new_cart
     end
   end
 

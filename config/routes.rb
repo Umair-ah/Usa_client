@@ -55,6 +55,8 @@ Rails.application.routes.draw do
 
   get "categories", to: "homes#categories", as: :categories
 
+  get "track", to: "homes#track", as: :track
+
 
 
 
