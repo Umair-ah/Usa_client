@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   has_one_attached :thumbnail
+  validates :thumbnail, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
 
   belongs_to :gender
   

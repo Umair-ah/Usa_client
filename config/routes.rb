@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   resources :products
   resources :categories, only: [:show]
 
+  resources :genders, only: :show
+
 
   post "color/:product_id" => "line_items#color", as: "color_select"
 

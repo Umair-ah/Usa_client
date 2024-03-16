@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   has_rich_text :description
   has_many_attached :images
 
+  validates :images, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
+
   has_many :colors
 
   validates :name, :price, presence: true
