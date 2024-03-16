@@ -14,7 +14,7 @@ class Admin::StocksController < ApplicationController
   end
 
   def new
-    @stock = Stock.new
+    @stock = @color.stocks.new
   end
 
   def edit
