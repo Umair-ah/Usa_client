@@ -7,35 +7,44 @@
 <div class="border-b border-slate-600 mt-8"></div>
 <h2 class="text-center text-3xl text-slate-700 mt-6 font-bold">Latest Collections</h2>
 
-<section>
-    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
-
-        <div class="lg:col-span-2 lg:py-8">
-          <ul class="grid grid-cols-2 gap-4">
-            <% @products.each do |product| %>
-              <%= link_to product_path(product), class:"group block flex flex-col justify-start" do %>
-                <li class="hover:bg-slate-100 transition:ease-in duration-300 border-y border-slate-500 p-6">
-
-                      <%= image_tag(product.images.first, class:"rounded object-cover h-48 w-96") %>
-
-                      <div class="mt-3">
-                        <h3
-                          class="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4"
-                        >
-                          <%= product.name %>
-                        </h3>
-
-                      </div>
-                </li>
-              <% end %>
-            <% end %>
-        
-          </ul>
+<div class="grid min-[300px]:grid-cols-2 md:grid-cols-4 p-2">
+  
+  <% @products.each do |product| %>
+    <div class="group my-10 flex w-full max-w-xs flex-col overflow-hidden bg-white border rounded-md shadow shadow-slate-300">
+      <%= link_to product_path(product), class:"relative mx-3 mt-3 flex h-60 overflow-hidden" do %>
+        <%= image_tag(product.images.first, class:"peer absolute top-0 right-0 h-full w-full object-cover") %>
+        <% if product.images.second.present?  %>
+          <%= image_tag(product.images.second, class:"peer absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-1000 hover:right-0 peer-hover:right-0") %>
+        <% else %>
+          <%= image_tag(product.images.first, class:"peer absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-1000 hover:right-0 peer-hover:right-0") %>
+        <% end %>
+        <!-- <div class="absolute  bottom-0 mb-4 flex space-x-4 w-full justify-center">
+          <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div> 
+          <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div>
+          <div class="rounded-full h-3 w-3 bg-gray-200 border-2 border-white"></div>
+        </div> -->
+        <svg class="pointer-events-none absolute inset-x-0 bottom-5 mx-auto text-3xl text-white  transition-opacity group-hover:animate-ping group-hover:opacity-30 peer-hover:opacity-0" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="currentColor" d="M2 10a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v10a4 4 0 0 1-2.328 3.635a2.996 2.996 0 0 0-.55-.756l-8-8A3 3 0 0 0 14 17v7H6a4 4 0 0 1-4-4V10Zm14 19a1 1 0 0 0 1.8.6l2.7-3.6H25a1 1 0 0 0 .707-1.707l-8-8A1 1 0 0 0 16 17v12Z" /></svg>
+        <!-- <span class="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">39% OFF</span> -->
+      <% end %>
+      <div class="mt-4 px-5 pb-5">
+        <%= link_to product_path(product) do %>
+          <h5 class="text-xl tracking-tight text-slate-900"><%= product.name %></h5>
+        <% end %>
+        <div class="mt-2 mb-5 flex items-center justify-between">
+          <p>
+            <span class="text-3xl font-bold text-slate-900">&#x20B9;<%= product.price %></span>
+            <!--<span class="text-sm text-slate-900 line-through">&#x20B9;1699</span> -->
+          </p>
         </div>
+        <%= link_to product_path(product), class:"flex items-center justify-center px-4 py-2 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 transition:ease-in duration-300 border-t" do %>
+          <h2 class="text-slate-700">View</h2>
+        <% end %>
       </div>
     </div>
-  </section>
+  <% end %>
+
+</div>
+
 
 <div class="border-b border-slate-600 mt-8"></div>
 
@@ -64,9 +73,9 @@
               <%= link_to gender_path(gender), class:"group block" do %>
                 
                 <% if gender.name == "Male" %>
-                  <%= image_tag("https://sslimages.shoppersstop.com/sys-master/images/h7f/h3a/30676058701854/S23CPOSK297_BISCUIT_alt1.jpg_2000Wx3000H", class:"rounded object-cover h-48 w-96") %>
+                  <%= image_tag("https://sslimages.shoppersstop.com/sys-master/images/h7f/h3a/30676058701854/S23CPOSK297_BISCUIT_alt1.jpg_2000Wx3000H", class:"rounded object-cover w-full") %>
                 <% else %>
-                  <%= image_tag("https://sslimages.shoppersstop.com/sys-master/images/h7e/h34/30025889316894/S23I-INLKUN349_PINK_alt1.jpg_2000Wx3000H", class:"rounded object-cover h-48 w-96") %>
+                  <%= image_tag("https://sslimages.shoppersstop.com/sys-master/images/h7e/h34/30025889316894/S23I-INLKUN349_PINK_alt1.jpg_2000Wx3000H", class:"rounded object-cover w-full") %>
                 <% end %>
 
                   <div class="mt-3">
