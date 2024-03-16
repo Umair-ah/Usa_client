@@ -31,4 +31,14 @@
     <% end %>
   </div>
 
+  
+  <% if category.thumbnail.present? %>
+    <div class="flex items-center justify-between bg-slate-100 mt-5">
+        <div class="flex flex-col items-center">
+          <%= image_tag(category.thumbnail, class:"w-14", style:"margin-inline: 15px;") %>
+          <%= button_to "Remove", remove_thumbnail_path(category, category.thumbnail) %>
+        </div>
+    </div>
+  <% end %>
+
 </div>

@@ -2,6 +2,13 @@ class Admin::CategoriesController < ApplicationController
   before_action :set_category, only: %i[ edit update destroy ]
   before_action :authenticate_admin!
 
+  def remove_thumbnail
+    category = Category.find(params[:category_id])
+    thumbnail = category.thumbnail
+    thumbnail.purge
+    redirect_to edit_admin_category_path(category)
+  end
+
   def index
     @categories = Category.all
   end

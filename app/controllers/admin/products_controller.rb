@@ -1,6 +1,13 @@
 class Admin::ProductsController < ApplicationController
   before_action :set_product, only: %i[ edit update destroy ]
   before_action :authenticate_admin!
+  
+  def remove_image
+    product = Product.find(params[:product_id])
+    image = product.images.find(params[:image_blob_id])
+    image.purge
+    redirect_to edit_admin_product_path(product)
+  end
 
   def index
     @products = Product.all

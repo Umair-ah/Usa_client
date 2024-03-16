@@ -42,6 +42,7 @@ class PaymentsController < ApplicationController
         end
         
         order.save!
+        OrderMailer.order_email(order).deliver_now
         @current_cart.destroy
         order.line_items.each do |line_item|
           stock = line_item.stock

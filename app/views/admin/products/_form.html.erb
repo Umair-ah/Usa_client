@@ -39,4 +39,13 @@
     <% end %>
 
   </div>
+
+  <div class="flex items-center justify-between bg-slate-100 mt-5">
+    <% product.images.each do |image| %>
+      <div class="flex flex-col items-center">
+        <%= image_tag(image, class:"w-14", style:"margin-inline: 15px;") %>
+        <%= button_to "Remove", remove_image_path(product, image) %>
+      </div>
+    <% end %>
+  </div>
 </div>

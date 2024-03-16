@@ -57,6 +57,10 @@ Rails.application.routes.draw do
 
   get "track", to: "homes#track", as: :track
 
+  post "remove_image/:product_id/:image_blob_id", to: "admin/products#remove_image", as: :remove_image
+  post "remove_thumbnail/:category_id/:thumbnail_blob_id", to: "admin/categories#remove_thumbnail", as: :remove_thumbnail
+
+
 
 
 
