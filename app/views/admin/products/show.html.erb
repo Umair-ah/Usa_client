@@ -1,29 +1,4 @@
 <div>
-  <h2 class="text-3xl font-bold text-slate-700 text-center my-5">Track Your Order</h2>
-</div>
-
-<div class="grid place-items-center">
-  <%= form_with(url: track_path, method: :get) do |f| %>
-
-    <div class="flex items-center justify-between gap-4">
-      <div>
-        <%= f.text_field :order_id, placeholder:"Order ID", required: true %>
-      </div>
-
-      <div>
-        <%= f.text_field :email, placeholder:"Email", required: true %>
-      </div>
-
-      <div>
-        <%= f.submit "Track", class:"bg-slate-700 p-2 text-white hover:bg-slate-600 hover:cursor-pointer" %>
-      </div>
-    </div>    
-  
-  <% end %>
-</div>
-
-<div>
-  <% if @order.present? %>
   <section class="h-screen py-12 sm:py-10 lg:py-5">
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-center">
@@ -120,10 +95,42 @@
               <% end %>
             </div>
 
-            <div class="mt-6 flex items-center justify-between">
+            <div class="mt-6 flex items-center justify-between bg-slate-100 p-2">
               <span class="text-medium text-gray-600" >Order Status:</span>
-              <span class="font-bold" style="<%= color_scheme(@order.status) %>" ><%= @order.status %></span>
+              <span class="font-bold" style="<%= color_scheme(@order.status) %>" >
+                  <%= turbo_frame_tag "order_#{@order.id}_status" do %>
+                    <%= @order.status %>
+                  <% end %>
+              </span>
               
+              <% if current_admin %>
+                
+              
+              <button id="dropdown<%= @order.id %>DefaultButton" data-dropdown-toggle="dropdown<%= @order.id %>" class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center dark:bg-slate-600 dark:hover:bg-slate-700 " type="button">
+                    Status <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                  </svg>
+                  </button>
+
+                  <!-- Dropdown<%= @order.id %> menu -->
+                  <div id="dropdown<%= @order.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown<%= @order.id %>DefaultButton">
+                        <li>
+                          <%= link_to "pending", admin_pending_path(@order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
+                        </li>
+                        <li>
+                          <%= link_to "out for delivery", admin_out_for_delivery_path(@order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
+                        </li>
+                        <li>
+                          <%= link_to "completed", admin_completed_path(@order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
+                        </li>
+                        <li>
+                          <%= link_to "cancelled", admin_cancelled_path(@order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
+                        </li>
+                      </ul>
+                  </div>
+              
+              <% end %>
             </div>
 
            
@@ -131,8 +138,8 @@
         </div>
       </div>
     </div>
+  <%= link_to "Back to Orders", admin_orders_path, class:"bg-gray-100 p-2" %>
   </section>
-  <% end %>
 
 
   

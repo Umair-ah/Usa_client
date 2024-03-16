@@ -7,6 +7,14 @@ Rails.application.routes.draw do
   
   
   namespace :admin do
+    get "/orders", to: "products#orders"
+    get "/order/:order_id", to: "products#show", as: :product_show
+    post "/order_pending/:order_id", to: "products#order_pending", as: :pending
+    post "/order_out_for_delivery/:order_id", to: "products#order_out_for_delivery", as: :out_for_delivery
+    post "/order_completed/:order_id", to: "products#order_completed", as: :completed
+    post "/order_cancelled/:order_id", to: "products#order_cancelled", as: :cancelled
+
+
     resources :genders, except: [:show ]
     resources :categories, except: [:show ]
     resources :products, except: [:show ] do

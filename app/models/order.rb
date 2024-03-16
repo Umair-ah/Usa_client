@@ -1,6 +1,13 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
 
+  enum status: {
+    "pending": 0,
+    "out for delivery": 1,
+    "completed": 2,
+    "cancelled": 3
+  }
+
   has_many :line_items, dependent: :destroy
 
   def indian_states
@@ -13,6 +20,8 @@ class Order < ApplicationRecord
       "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Lakshadweep", "Puducherry"
     ]
   end
+
+
 
   def order_total
     tot = 0

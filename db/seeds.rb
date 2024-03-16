@@ -7,3 +7,5 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 Admin.create(email:"admin@test.com", password:"admin12")
+Gender.create(name: "Male")
+Gender.create(name: "Female")

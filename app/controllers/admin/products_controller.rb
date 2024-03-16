@@ -1,6 +1,77 @@
 class Admin::ProductsController < ApplicationController
   before_action :set_product, only: %i[ edit update destroy ]
   before_action :authenticate_admin!
+
+
+  def show
+    @order = Order.find(params[:order_id])
+  end
+
+
+  def order_cancelled
+    @order = Order.find(params[:order_id])
+    @order.cancelled!
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream:
+        turbo_stream.update(
+          "order_#{@order.id}_status",
+          partial:"admin/products/status",
+          locals: { order: @order }
+        )
+      }
+
+    end
+  end
+  
+  def order_completed
+    @order = Order.find(params[:order_id])
+    @order.completed!
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream:
+        turbo_stream.update(
+          "order_#{@order.id}_status",
+          partial:"admin/products/status",
+          locals: { order: @order }
+        )
+      }
+    end
+  end
+
+  def order_out_for_delivery
+    @order = Order.find(params[:order_id])
+    @order.out_for_delivery!
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream:
+        turbo_stream.update(
+          "order_#{@order.id}_status",
+          partial:"admin/products/status",
+          locals: { order: @order }
+        )
+      }
+    end
+  end
+
+  def order_pending
+    @order = Order.find(params[:order_id])
+    @order.pending!
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream:
+        turbo_stream.update(
+          "order_#{@order.id}_status",
+          partial:"admin/products/status",
+          locals: { order: @order }
+        )
+      }
+    end
+  end
+
+  def orders
+    @orders = Order.all.order(created_at: :desc)
+  end
   
   def remove_image
     product = Product.find(params[:product_id])
@@ -10,7 +81,15 @@ class Admin::ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    if params[:product_name].present? && params[:category] == ""
+      @products = Product.where("name ILIKE ?", "%#{params[:product_name]}%")
+    elsif params[:product_name].present? && params[:category].present?
+      @products = Product.where("name ILIKE ? AND category_id = ?", "%#{params[:product_name]}%", params[:category].to_i)
+    elsif params[:product_name] == "" && params[:category].present?
+      @products = Product.where("category_id = ?", params[:category].to_i)
+    else
+      @products = Product.all
+    end
   end
 
   
