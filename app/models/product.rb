@@ -8,7 +8,9 @@ class Product < ApplicationRecord
 
   has_many :colors
 
-  validates :name, :price, presence: true
+  validates :name, presence: true
+  validates :price, presence: true
+
 
   has_many :stocks, through: :colors
 

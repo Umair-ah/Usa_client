@@ -6,7 +6,7 @@
       </div>
 
       <div class="mx-auto mt-8 max-w-2xl md:mt-12">
-        <div class="bg-white shadow">
+        <div class="bg-white ">
           <div class="px-4 py-6 sm:px-8 sm:py-10">
             <div class="flow-root">
               <ul class="-my-8">
@@ -27,15 +27,15 @@
                         </div>
 
                         <div class="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
-                          <p class="shrink-0 w-20 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">&#x20B9;<%= line_item.product.price %></p>
+                          <p class="shrink-0 w-20 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">$<%= line_item.product.price %></p>
 
                           <div class="sm:order-1">
                             <div class="mx-auto flex h-8 items-stretch text-gray-600">
-                              <%= link_to "-", subtract_quantity_path(line_item.product, line_item.stock), data:{turbo_method: :post}, class:"flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-orange-500 hover:text-white" %>
+                              <%= link_to "-", subtract_quantity_path(line_item.product, line_item.stock), data:{turbo_method: :post}, class:"flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-slate-500 hover:text-white" %>
                               <div class="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">
                                   <%= line_item.quantity %>
                               </div>
-                              <%= link_to "+", add_quantity_path(line_item.product, line_item.stock), data:{turbo_method: :post}, class:"flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-orange-500 hover:text-white" %>
+                              <%= link_to "+", add_quantity_path(line_item.product, line_item.stock), data:{turbo_method: :post}, class:"flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-slate-500 hover:text-white" %>
                             </div>
                           </div>
                         </div>
@@ -58,23 +58,23 @@
             <div class="mt-6 border-t border-b py-2">
               <div class="flex items-center justify-between">
                 <p class="text-sm text-gray-400">Subtotal</p>
-                  <p class="text-lg font-semibold text-gray-900"> &#x20B9;<%= @current_cart.sub_total %></p>
+                  <p class="text-lg font-semibold text-gray-900"> $<%= @current_cart.sub_total %></p>
                 
               </div>
               <div class="flex items-center justify-between">
                 <p class="text-sm text-gray-400">Shipping</p>
-                <p class="text-lg font-semibold text-gray-900"> &#x20B9;8.00</p>
+                <p class="text-lg font-semibold text-gray-900"> $8.00</p>
               </div>
             </div>
             <div class="mt-6 flex items-center justify-between">
               <p class="text-sm font-medium text-gray-900">Total</p>
-              <p class="text-2xl font-semibold text-gray-900"><span class="text-xs font-normal text-gray-400">INR</span> 
+              <p class="text-2xl font-semibold text-gray-900"><span class="text-xs font-normal text-gray-400">USD</span> 
                   <%= @current_cart.sub_total %>
               </p>
             </div>
 
             <div class="mt-6 text-center">
-              <%= button_to checkout_path, data:{turbo: false}, class:"group inline-flex w-full items-center justify-center rounded-md bg-orange-600 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-orange-700" do %>
+              <%= button_to checkout_path, data:{turbo: false}, class:"group inline-flex w-full items-center justify-center rounded-md bg-gray-500 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-slate-700" do %>
                 Checkout
                 <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:ml-8 ml-4 h-6 w-6 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />

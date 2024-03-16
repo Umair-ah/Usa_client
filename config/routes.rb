@@ -61,7 +61,10 @@ Rails.application.routes.draw do
   post "/select_payment_option", to: "payments#select_payment_option", as: :select_payment_option
   get "/success", to: "payments#success", as: :success
 
-  get "orders", to: "payments#index", as: :orders
+  get "orders", to: "products#index", as: :orders
+  get "order/:id", to: "products#order_show", as: :order_show
+
+
 
   get "categories", to: "homes#categories", as: :categories
 
