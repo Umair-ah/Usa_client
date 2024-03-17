@@ -1,113 +1,151 @@
+<div class="flex items-center justify-between">
 
+  <%= form_with(url: admin_orders_path, method: :get, class:"my-3") do |f| %>
+    <div class="relative z-0 w-full mb-5 group">
+      <div class="flex items-center">
+        <div>
+          <%= f.text_field :query_two, class:"block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder:" " %>
+          <%= f.label "Search By Order ID", class:"peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" %>
+        </div>
+        <%= f.submit "Search", class:"bg-gray-700 hover:bg-gray-800 hover:cursor-pointer p-2 text-white" %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form_with(url: admin_orders_path, method: :get, class:"my-3") do |f| %>
+    <div class="relative z-0 w-full mb-5 group">
+      <div class="flex items-center">
+        <div>
+          <%= f.text_field :query, placeholder:"", class:"w-[450px] block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  %>
+          <%= f.label "Search By Name, Email, Phone", class:"peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" %>
+        </div>
+        <%= f.submit "Search", class:"bg-gray-700 hover:bg-gray-800 hover:cursor-pointer p-2 text-white" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+<div class="flex items-center justify-between">
+
+  <%= form_with(url: admin_orders_path, method: :get) do |f| %>
+    <%= f.select :status,  options_for_select(['None', 'pending', 'out for delivery', 'completed', 'cancelled']) %>
+    <%= f.submit "Filter", class:"bg-gray-700 hover:bg-gray-800 hover:cursor-pointer p-2 text-white"%>
+  <% end %>
+
+  <%= form_with(url: admin_orders_path, method: :get) do |f| %>
+    <%= f.submit "Reset", class:"bg-gray-700 hover:bg-gray-800 hover:cursor-pointer p-2 text-white"%>
+  <% end %>
+</div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Order ID
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Email
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Phone 
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    State 
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    PIN 
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    City 
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Address Line 1 
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Address Line 2 
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Status</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-          <% @orders.each do |order| %>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <%= link_to order.id, admin_product_show_path(order), class:"hover:text-blue-600" %>
-                </th>
-                <td class="px-6 py-4">
-                  <%= order.name %>
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                  <th scope="col" class="px-6 py-3">
+                      Order ID
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Name
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Email
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Phone 
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      State 
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      PIN 
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      City 
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Address Line 1 
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      Address Line 2 
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                      <span class="sr-only">Status</span>
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+            <% @orders.each do |order| %>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <%= link_to order.id, admin_product_show_path(order), class:"hover:text-blue-600" %>
+                  </th>
+                  <td class="px-6 py-4">
+                    <%= order.name %>
 
-                </td>
-                <td class="px-6 py-4">
-                  <%= order.email %>
+                  </td>
+                  <td class="px-6 py-4">
+                    <%= order.email %>
 
-                </td>
-                <td class="px-6 py-4">
-                  <%= order.phone_number %>
+                  </td>
+                  <td class="px-6 py-4">
+                    <%= order.phone_number %>
 
-                </td>
-                <td class="px-6 py-4">
-                  <%= order.state %>
+                  </td>
+                  <td class="px-6 py-4">
+                    <%= order.state %>
 
-                </td>
-                <td class="px-6 py-4">
-                  <%= order.pin %>
+                  </td>
+                  <td class="px-6 py-4">
+                    <%= order.pin %>
 
-                </td>
-                <td class="px-6 py-4">
-                  <%= order.city %>
-                </td>
-                <td class="px-6 py-4">
-                  <%= order.address_line_1 %>
-                </td>
+                  </td>
+                  <td class="px-6 py-4">
+                    <%= order.city %>
+                  </td>
+                  <td class="px-6 py-4">
+                    <%= order.address_line_1 %>
+                  </td>
 
-                <td class="px-6 py-4">
-                  <%= order.address_line_2 %>
-                </td>
-                <td class="px-6 py-4 text-right">
-                    
-                  <%= turbo_frame_tag "order_#{order.id}_status" do %>
-                    <%= render "admin/products/status", order: order %>
-                  <% end %>
-                  <button id="dropdown<%= order.id %>DefaultButton" data-dropdown-toggle="dropdown<%= order.id %>" class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center dark:bg-slate-600 dark:hover:bg-slate-700 " type="button">
-                    Status <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                  </svg>
-                  </button>
+                  <td class="px-6 py-4">
+                    <%= order.address_line_2 %>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                      
+                    <%= turbo_frame_tag "order_#{order.id}_status" do %>
+                      <%= render "admin/products/status", order: order %>
+                    <% end %>
+                    <button id="dropdown<%= order.id %>DefaultButton" data-dropdown-toggle="dropdown<%= order.id %>" class="text-white bg-slate-700 hover:bg-slate-800 font-medium rounded-lg text-sm p-1 text-center inline-flex items-center dark:bg-slate-600 dark:hover:bg-slate-700 " type="button">
+                      Status <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                    </button>
 
-                  <!-- Dropdown<%= order.id %> menu -->
-                  <div id="dropdown<%= order.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown<%= order.id %>DefaultButton">
-                        <li>
-                          <%= link_to "pending", admin_pending_path(order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
-                        </li>
-                        <li>
-                          <%= link_to "out for delivery", admin_out_for_delivery_path(order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
-                        </li>
-                        <li>
-                          <%= link_to "completed", admin_completed_path(order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
-                        </li>
-                        <li>
-                          <%= link_to "cancelled", admin_cancelled_path(order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
-                          
-                        </li>
-                      </ul>
-                  </div>
-                  <div>
-                  </div>
+                    <!-- Dropdown<%= order.id %> menu -->
+                    <div id="dropdown<%= order.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown<%= order.id %>DefaultButton">
+                          <li>
+                            <%= link_to "pending", admin_pending_path(order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
+                          </li>
+                          <li>
+                            <%= link_to "out for delivery", admin_out_for_delivery_path(order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
+                          </li>
+                          <li>
+                            <%= link_to "completed", admin_completed_path(order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
+                          </li>
+                          <li>
+                            <%= link_to "cancelled", admin_cancelled_path(order), data:{turbo_method: :post}, class:"block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"%>
+                            
+                          </li>
+                        </ul>
+                    </div>
+                    <div>
+                    </div>
 
-                </td>
-            </tr>
-          <% end %>
+                  </td>
+              </tr>
+            <% end %>
 
-        </tbody>
-    </table>
-</div>
+          </tbody>
+      </table>
+  </div>

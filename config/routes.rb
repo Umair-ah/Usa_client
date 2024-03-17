@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   
   namespace :admin do
     get "/orders", to: "products#orders"
+
+
     get "/order/:order_id", to: "products#show", as: :product_show
     post "/order_pending/:order_id", to: "products#order_pending", as: :pending
     post "/order_out_for_delivery/:order_id", to: "products#order_out_for_delivery", as: :out_for_delivery

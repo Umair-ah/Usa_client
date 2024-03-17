@@ -20,7 +20,7 @@
       
       <div>
         <%= form.label :category_id, style: "display: block" %>
-        <%= form.collection_select :category_id, Category.order(:name), :id, :name %>
+        <%= form.collection_select :category_id, Category.order(:name), :id, :name,{},{ data:{controller:"slim"}} %>
       </div>
 
       <div>

@@ -12,3 +12,12 @@ application.register("pin", PinController)
 
 import RazorpayController from "./razorpay_controller"
 application.register("razorpay", RazorpayController)
+
+import SearchController from "./search_controller"
+application.register("search", SearchController)
+
+import SlimController from "./slim_controller"
+application.register("slim", SlimController)
+
+import WireController from "./wire_controller"
+application.register("wire", WireController)

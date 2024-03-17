@@ -69,8 +69,28 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
+  
+
+  
+
+  
+
   def orders
-    @orders = Order.all.order(created_at: :desc)
+    if params[:query_two].present?
+      @orders = Order.where(id: params[:query_two])
+    elsif params[:query].present?
+      @orders = Order.where("name ILIKE ? OR email ILIKE ? OR phone_number ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%")
+    elsif params[:status] == 'pending'
+      @orders = Order.where(status: 'pending')
+    elsif params[:status] == 'out for delivery'
+      @orders = Order.where(status: 'out for delivery')
+    elsif params[:status] == 'completed'
+      @orders = Order.where(status: 'completed')
+    elsif params[:status] == 'cancelled'
+      @orders = Order.where(status: 'cancelled')
+    else
+      @orders = Order.all.order(created_at: :desc)
+    end
   end
   
   def remove_image
