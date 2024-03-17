@@ -60,8 +60,9 @@
               Discover the latest in fashion with our New Apparels collection, where style meets innovation. 
             </p>
           </header>
+          <%= link_to "Men", gender_path(Gender.first), class:"mt-8 inline-block rounded border border bg-slate-700 hover:bg-slate-600 transition:ease-in duration-300 px-12 py-3 text-sm font-medium text-white transition hover:shadow focus:outline-none focus:ring" %>
+          <%= link_to "Women", gender_path(Gender.second), class:"mt-8 inline-block rounded border border bg-slate-700 hover:bg-slate-600 transition:ease-in duration-300 px-12 py-3 text-sm font-medium text-white transition hover:shadow focus:outline-none focus:ring" %>
 
-          <%= link_to "Shop All", products_path, class:"mt-8 inline-block rounded border border bg-slate-700 hover:bg-slate-600 transition:ease-in duration-300 px-12 py-3 text-sm font-medium text-white transition hover:shadow focus:outline-none focus:ring" %>
 
         </div>
       </div>
