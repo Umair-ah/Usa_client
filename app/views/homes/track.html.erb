@@ -5,7 +5,7 @@
 <div class="grid place-items-center">
   <%= form_with(url: track_path, method: :get) do |f| %>
 
-    <div class="flex items-center justify-between gap-4">
+    <div class="md:flex items-center justify-between gap-4">
       <div>
         <%= f.text_field :order_id, placeholder:"Order ID", required: true %>
       </div>
@@ -76,7 +76,7 @@
               </div>
               
             </div>
-            <div class="mt-6 flex items-center justify-between">
+            <div class="mt-6 md:flex items-center justify-between">
               <div>
                 <span class="text-medium text-gray-600">Name:</span>
                 <span class="text-medium font-bold text-gray-800"><%= @order.name %></span>
@@ -92,7 +92,7 @@
               </div>
             </div>
 
-            <div class="mt-6 flex items-center justify-between">
+            <div class="mt-6 md:flex items-center justify-between">
               <div>
                 <span class="text-medium text-gray-600">State:</span>
                 <span class="text-medium font-bold text-gray-800"><%= @order.state %></span>
@@ -108,7 +108,7 @@
               </div>
             </div>
 
-            <div class="mt-6 flex items-center justify-between">
+            <div class="mt-6 md:flex items-center justify-between">
               <div>
                 <span class="text-medium text-gray-600">Address Line 1:</span>
                 <span class="text-medium font-bold text-gray-800"><%= @order.address_line_1 %></span>
