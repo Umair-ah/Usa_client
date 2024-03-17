@@ -1,54 +1,45 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="grid place-items-center">
+  <div class="bg-white border p-9 my-10">
+    <h2 class="text-center text-2xl font-bold text-slate-600 mb-3">Edit Account</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div>
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
+      <div class="md:flex items-center justify-between mb-2 gap-4">
+        <div>
+          <%= f.label :first_name, class:"block" %>
+          <%= f.text_field :first_name %>
+        </div>
 
-  <div>
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
+        <div>
+          <%= f.label :last_name, class:"block" %>
+          <%= f.text_field :last_name %>
+        </div>
+      </div>
 
-  <div>
-    <%= f.label :phone_number %>
-    <%= f.phone_field :phone_number, min: 10, max: 10 %>
-  </div>
+      <div class="md:flex items-center justify-between mb-2 gap-4">
+        <div>
+          <%= f.label :phone_number, class:"block" %>
+          <%= f.phone_field :phone_number, min: 10, max: 10 %>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <div class="field">
+          <%= f.label :email, class:"block" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      
+
+      <div class="actions">
+        <%= f.submit "Update", class:"my-2 bg-slate-700 hover:bg-slate-800 transition:ease-in duration-300 text-white p-2 hover:cursor-pointer" %>
+      </div>
     <% end %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<%= link_to "Back", :back %>
+    <%= link_to "Back", :back %>
+      </div>
+</div>

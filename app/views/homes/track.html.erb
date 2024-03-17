@@ -49,9 +49,11 @@
                           <p class="mx-0 mt-1 mb-0 text-sm text-gray-500 font-bold">Color: <%= line_item.color.name %></p>
                           <p class="mx-0 mt-1 mb-0 text-sm text-gray-500 font-bold">Size: <%= line_item.stock.size %></p>
 
+
                         </div>
 
                         <div class="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
+                          <p class="mx-0 mt-1 mb-0 text-sm text-gray-500 font-bold">Qty: <%= line_item.quantity %></p>
                           <p class="shrink-0 w-20 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">$<%= line_item.product.price %></p>
 
                          

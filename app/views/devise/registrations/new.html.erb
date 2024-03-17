@@ -1,44 +1,57 @@
-<h2>Sign up</h2>
+<div class="grid place-items-center">
+  <div class="bg-white border p-9 my-10">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <h2 class="text-center text-2xl font-bold text-slate-600">Don't have an account?</h2>
+    <h2 class="text-center text-2xl font-bold text-slate-600 mb-7">Sign Up!</h2>
 
-  <div>
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+
+      <div class="md:flex items-center justify-between gap-4 mb-2">
+        <div>
+          <%= f.label :first_name, class:"block" %>
+          <%= f.text_field :first_name %>
+        </div>
+      
+        <div>
+          <%= f.label :last_name, class:"block"  %>
+          <%= f.text_field :last_name %>
+        </div>
+      </div>
+
+      <div class="md:flex items-center justify-between gap-4 mb-2">
+        <div>
+          <%= f.label :phone_number, class:"block"  %>
+          <%= f.phone_field :phone_number, min: 10, max: 10 %>
+        </div>
+
+        <div class="field">
+          <%= f.label :email, class:"block" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Sign up", class:"my-2 bg-slate-700 hover:bg-slate-800 transition:ease-in duration-300 text-white p-2 hover:cursor-pointer" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
   </div>
 
-  <div>
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div>
-    <%= f.label :phone_number %>
-    <%= f.phone_field :phone_number, min: 10, max: 10 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
