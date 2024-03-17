@@ -97,13 +97,13 @@ class Admin::ProductsController < ApplicationController
 
   def index
     if params[:product_name].present? && params[:category] == ""
-      @products = Product.where("name ILIKE ?", "%#{params[:product_name]}%")
+      @products_pagy, @products = pagy(Product.where("name ILIKE ?", "%#{params[:product_name]}%"))
     elsif params[:product_name].present? && params[:category].present?
-      @products = Product.where("name ILIKE ? AND category_id = ?", "%#{params[:product_name]}%", params[:category].to_i)
+      @products_pagy, @products = pagy(Product.where("name ILIKE ? AND category_id = ?", "%#{params[:product_name]}%", params[:category].to_i))
     elsif params[:product_name] == "" && params[:category].present?
-      @products = Product.where("category_id = ?", params[:category].to_i)
+      @products_pagy, @products = pagy(Product.where("category_id = ?", params[:category].to_i))
     else
-      @products = Product.all
+      @products_pagy, @products = pagy(Product.all.order(created_at: :desc))
     end
   end
 

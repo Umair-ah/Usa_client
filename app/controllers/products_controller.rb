@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @orders = current_user.orders
+    @orders_pagy, @orders = pagy(current_user.orders)
   end
 
 

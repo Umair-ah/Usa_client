@@ -10,7 +10,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.all
+    @categories_pagy, @categories = pagy(Category.all)
   end
 
   def new
