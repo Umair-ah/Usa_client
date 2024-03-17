@@ -1,5 +1,9 @@
 class HomesController < ApplicationController
 
+  def policy
+    
+  end
+
   def index
     @genders = Gender.all
     @products = Product.all.limit(4)

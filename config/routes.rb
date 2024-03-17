@@ -76,7 +76,7 @@ Rails.application.routes.draw do
   post "remove_thumbnail/:category_id/:thumbnail_blob_id", to: "admin/categories#remove_thumbnail", as: :remove_thumbnail
 
 
-
+  get "/PurchasePolicies", to: "homes#policy", as: :policy
 
 
 
