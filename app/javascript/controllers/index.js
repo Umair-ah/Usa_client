@@ -2,22 +2,13 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import HelloController from "./hello_controller";
+application.register("hello", HelloController);
 
-import PinController from "./pin_controller"
-application.register("pin", PinController)
+import PinController from "./pin_controller";
+application.register("pin", PinController);
 
-import RazorpayController from "./razorpay_controller"
-application.register("razorpay", RazorpayController)
-
-import SearchController from "./search_controller"
-application.register("search", SearchController)
-
-import SlimController from "./slim_controller"
-application.register("slim", SlimController)
-
-import WireController from "./wire_controller"
-application.register("wire", WireController)
+import SlimController from "./slim_controller";
+application.register("slim", SlimController);

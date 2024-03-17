@@ -156,6 +156,7 @@ GEM
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (7.0.10)
     pg (1.5.4)
     phonelib (0.8.7)
     pincode_validator (2.0.0)
@@ -268,6 +269,7 @@ DEPENDENCIES
   indian_postal_codes
   jbuilder
   jsbundling-rails
+  pagy (~> 7.0)
   pg (~> 1.1)
   phonelib (~> 0.8.7)
   pincode_validator

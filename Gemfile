@@ -83,3 +83,4 @@ gem 'indian_postal_codes'
 gem "stripe"
 
 gem 'activestorage-validator'
+gem "pagy", "~> 7.0"

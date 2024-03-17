@@ -69,27 +69,22 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
-  
-
-  
-
-  
 
   def orders
     if params[:query_two].present?
-      @orders = Order.where(id: params[:query_two])
+      @orders_pagy, @orders = pagy(Order.where(id: params[:query_two]))
     elsif params[:query].present?
-      @orders = Order.where("name ILIKE ? OR email ILIKE ? OR phone_number ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%")
+      @orders_pagy, @orders = pagy(Order.where("name ILIKE ? OR email ILIKE ? OR phone_number ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%"))
     elsif params[:status] == 'pending'
-      @orders = Order.where(status: 'pending')
+      @orders_pagy, @orders = pagy(Order.where(status: 'pending'))
     elsif params[:status] == 'out for delivery'
-      @orders = Order.where(status: 'out for delivery')
+      @orders_pagy, @orders = pagy(Order.where(status: 'out for delivery'))
     elsif params[:status] == 'completed'
-      @orders = Order.where(status: 'completed')
+      @orders_pagy, @orders = pagy(Order.where(status: 'completed'))
     elsif params[:status] == 'cancelled'
-      @orders = Order.where(status: 'cancelled')
+      @orders_pagy, @orders = pagy(Order.where(status: 'cancelled'))
     else
-      @orders = Order.all.order(created_at: :desc)
+      @orders_pagy, @orders = pagy(Order.all.order(created_at: :desc))
     end
   end
   

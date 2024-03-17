@@ -1,37 +1,39 @@
-<%= form_with(model: [:admin, @product, @color, stock]) do |form| %>
-  <% if stock.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+<div class="grid place-items-center">
+  <div class="bg-slate-100 p-4">
 
-      <ul>
-        <% stock.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= form_with(model: [:admin, @product, @color, stock]) do |form| %>
+      <% if stock.errors.any? %>
+          <ul>
+            <% stock.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="bg-gray-200 text-gray-900 font-bold">
-    <%= @product.name %> <br>
-    <%= @color.name %>
+      <div class="bg-gray-200 text-gray-900 font-bold">
+        <span class="font-bold text-lg">Product:</span> <%= @product.name %> <br>
+        <span class="font-bold text-lg">Color:</span> <%= @color.name %>
 
 
+      </div>
+
+        <%= form.hidden_field :product_id, value: @product.id %>
+
+
+      <div>
+        <%= form.label :size, style: "display: block" %>
+        <%= form.text_field :size %>
+      </div>
+
+      <div>
+        <%= form.label :piece, style: "display: block" %>
+        <%= form.number_field :piece %>
+      </div>
+
+      <div>
+        <%= form.submit class:"p-2 text-white bg-slate-800 hover:bg-slate-700 hover:cursor-pointer" %>
+      </div>
+    <% end %>
   </div>
-
-    <%= form.hidden_field :product_id, value: @product.id %>
-
-
-  <div>
-    <%= form.label :size, style: "display: block" %>
-    <%= form.text_field :size %>
-  </div>
-
-  <div>
-    <%= form.label :piece, style: "display: block" %>
-    <%= form.number_field :piece %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

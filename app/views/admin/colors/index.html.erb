@@ -8,7 +8,7 @@
       <%= @product.category.name %>
     </p>
     <p class="text-slate-800 font-bold">
-      &#x20B9;<%= @product.price %>
+      $<%= @product.price %>
       <%= link_to edit_admin_product_path(@product), class:"text-red-700 px-3 py-2 hover:text-red-800 transition:ease-out duration-300" do %>
         <i class="fa-solid fa-pencil"></i>
       <% end %>
@@ -36,6 +36,7 @@
 
 
 
-
-<%= link_to "Back", admin_products_path %>
+<div class="mt-8">
+  <%= link_to "Back", admin_products_path, class:"mt-4 bg-slate-200 p-2" %>
+</div>
 
