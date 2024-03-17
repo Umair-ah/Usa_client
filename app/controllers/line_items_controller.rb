@@ -64,23 +64,24 @@ class LineItemsController < ApplicationController
   def color
     @product = Product.find(params[:product_id])
     @color_of_selected_product = @product.colors.find(params[:color_id])
-    respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream:
-        [
 
-          turbo_stream.update(
-            'sizes',
-            partial: "products/sizes"
-          ),
-          turbo_stream.update(
-            "add_to_cart_btn",
-            partial: "products/empty",
-          )
-
-        ]
-      }
-    end
+      respond_to do |format|
+        format.turbo_stream {
+          render turbo_stream:
+          [
+            
+            turbo_stream.update(
+              'sizes',
+              partial: "products/sizes"
+            ),
+            turbo_stream.update(
+              "add_to_cart_btn",
+              partial: "products/empty",
+            )
+            
+          ]
+        }
+      end
   end
 
   def size

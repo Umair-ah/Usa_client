@@ -3,12 +3,11 @@
 
     <%= form_with(model: [:admin, @product, @color, stock]) do |form| %>
       <% if stock.errors.any? %>
-          <ul>
+          <ul style="color:red;">
             <% stock.errors.each do |error| %>
               <li><%= error.full_message %></li>
             <% end %>
           </ul>
-        </div>
       <% end %>
 
       <div class="bg-gray-200 text-gray-900 font-bold">

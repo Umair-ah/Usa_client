@@ -63,11 +63,16 @@
                   
                   <% if @product.colors.present? %>
                     <span class="text-slate-600">Select Color</span>
-                    <%= form_with(url: color_select_path(@product), method: :post, class:"mt-2") do |f| %>
-                      <% @product.colors.each do |color| %>
-                        <%= f.button color.name, name: 'color_id', type: "submit", class:"bg-slate-100 px-4 py-2 hover:bg-slate-200 font-bold", value: color.id %>
+                      <%= form_with(url: color_select_path(@product), method: :post, class:"mt-2") do |f| %>
+                        <% @product.colors.each do |color| %>
+                          
+                          <% if color.stocks.present? %>
+                            <%= f.button color.name, name: 'color_id', type: "submit", class:"bg-slate-100 px-4 py-2 hover:bg-slate-200 font-bold", value: color.id %>
+                          <% else %>
+                            <%= f.button color.name, name: 'color_id', disabled: true, class:"bg-slate-300 px-4 py-2 font-bold", value: color.id %>
+                          <% end %>
+                        <% end %>
                       <% end %>
-                    <% end %>
                   <% else %>
                     <p class="text-red-700 font-bold">Out Of Stock!</p>
                   <% end %>
