@@ -1,0 +1,41 @@
+<div class="bg-gray-100">
+    <div class="max-w-screen-lg py-10 px-4 sm:px-6 text-gray-800 sm:flex justify-between mx-auto">
+        <div class="p-5 sm:w-2/12 border-r">
+            <div class="text-sm uppercase text-slate-600 font-bold">Menu</div>
+            <ul>
+                <li class="my-2">
+                  <%= link_to "Home", root_path, class:"hover:text-slate-600" %>
+                </li>
+                <li class="my-2">
+                  <%= link_to "Men Cloths", gender_path(Gender.first), class:"hover:text-slate-600" %>
+                </li>
+                <li class="my-2">
+                  <%= link_to "Women Cloths", gender_path(Gender.second), class:"hover:text-slate-600" %>
+                </li>
+                <li class="my-2">
+                  <%= link_to "Track Your Order", track_path, class:"hover:text-slate-600" %>
+                </li>
+                <li class="my-2">
+                  <%= link_to "Purchase Policies", policy_path, class:"hover:text-slate-600" %>
+                </li>
+            </ul>
+        </div>
+        <div class="p-5 sm:w-7/12 border-r text-center">
+            <h3 class="font-bold text-xl text-slate-600 mb-4">About Us</h3>
+            <p class="text-gray-500 text-sm mb-10">Discover the essence of desi elegance. Your go-to destination for traditional wear in the USA. From stunning sarees to intricately crafted salwar suits, our curated collection celebrates the vibrant colors and rich heritage of South Asian fashion. With a focus on quality and personalized service, we're dedicated to helping you find the perfect outfit for any occasion. Embrace the beauty of desi clothing with us and step into a world of timeless style and cultural splendor.
+</p>
+        </div>
+        <div class="p-5 sm:w-3/12">
+            <div class="text-sm uppercase text-slate-600 font-bold">Contact Us</div>
+            <ul>
+                <li class="my-2">
+                    <a class="hover:text-slate-600" href="#">+1 (347) 376-2228</a>
+                </li>
+                <li class="my-2">
+                    <a class="hover:text-slate-600" href="#">kmbabajan0786@gmail.com</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+</div>

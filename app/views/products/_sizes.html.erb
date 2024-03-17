@@ -7,12 +7,8 @@
 
         <% if stock.piece > 0  %>
           <%= f.button stock.size, name: 'stock_id', type: "submit", class:"bg-slate-100 px-4 py-2 hover:bg-slate-200 font-bold", value: stock.id if stock.available? %>
-        <% else %>
-          <span class="text-red-800 font-bold">Out Of Stock!</span>
         <% end %>
       <% end %>
-    <% else %>
-      <span class="text-red-800 font-bold">Out Of Stock!</span>
     <% end %>
   <% end %>
 </div>
@@ -23,11 +19,8 @@
 
         <% if stock.piece > 0  %>
           <span class="text-red-600 font-bold block">Only <b><%= stock.piece %> pieces</b> Left for Size <b><%= stock.size %></b>!</span>
-        <% else %>
-          <span class="text-red-800 font-bold">Out Of Stock!</span>
         <% end %>
       <% end %>
-    <% else %>
-      <span class="text-red-800 font-bold">Out Of Stock!</span>
+
     <% end %>
 </div>
