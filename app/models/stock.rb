@@ -5,6 +5,8 @@ class Stock < ApplicationRecord
   has_many :line_items
   has_many :products, through: :line_items
 
+
+  validates :size, presence: true
   validates :piece, presence: true
   validate :unique_sizes_per_color
 
