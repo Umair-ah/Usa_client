@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OrangeTurtle</title>
+    <title>XaRk</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -21,6 +21,11 @@
       <%= yield %>
     <% end %>
   </body>
-  <%= render "shared/footer" %>
+
+  
+  <% unless current_admin %>
+    <%= render "shared/footer" %>
+  <% end %>
+  
   
 </html>
