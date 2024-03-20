@@ -17,7 +17,7 @@
   <% if @color_of_selected_product.stocks.present? %>
       <% @color_of_selected_product.stocks.each do |stock| %>
 
-        <% if stock.piece > 0  %>
+        <% if stock.piece < 5  %>
           <span class="text-red-600 font-bold block">Only <b><%= stock.piece %> pieces</b> Left for Size <b><%= stock.size %></b>!</span>
         <% end %>
       <% end %>

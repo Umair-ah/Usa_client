@@ -85,3 +85,4 @@ gem "stripe"
 gem 'activestorage-validator'
 gem "pagy", "~> 7.0"
 gem "aws-sdk-s3", require: false
+gem "letter_opener", group: :development

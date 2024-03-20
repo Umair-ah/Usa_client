@@ -10,14 +10,16 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'example.com',
-    user_name:            '<your-email>',
-    password:             '<your-password>',
+    address:              'in-v3.mailjet.com',
+    port:                 2525,
+    user_name:            '4a2f8175917c81f740c7fb220e72e5d5',
+    password:             'aad6313078bc52e8a6f2138c1e24ab97',
     authentication:       'plain',
     enable_starttls_auto: true
   }
+
+  #config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
   # Do not eager load code on boot.
   config.eager_load = false

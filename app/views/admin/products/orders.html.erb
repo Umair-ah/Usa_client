@@ -33,9 +33,7 @@
     <%= f.submit "Filter", class:"bg-gray-700 hover:bg-gray-800 hover:cursor-pointer p-2 text-white"%>
   <% end %>
 
-  <%= form_with(url: admin_orders_path, method: :get) do |f| %>
-    <%= f.submit "Reset", class:"bg-gray-700 hover:bg-gray-800 hover:cursor-pointer p-2 text-white"%>
-  <% end %>
+  <%= link_to "Reset", admin_orders_path, class:"bg-gray-700 hover:bg-gray-800 hover:cursor-pointer p-2 text-white" %>
 </div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
