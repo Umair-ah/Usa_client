@@ -6,6 +6,19 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+cloudflare:
+  service: S3
+  endpoint: https://e1c6be1793376217e4f15cf8df2850d1.r2.cloudflarestorage.com
+  access_key_id: ccda767620ab3d4671892ba5eee85fda
+  secret_access_key: d4bcc01d26a2baed5e9f3ef6e8f6b39ec12e108b653bf8d7dc0c30db1ef33ab3
+  region: auto
+  bucket: xark-dev
+# cloudflare:
+#   service: Cloudflare
+#   # Replace with your Cloudflare account information
+#   account_id: e1c6be1793376217e4f15cf8df2850d1
+#   api_key: your-api-key
+#   zone_id: your-zone-id
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3

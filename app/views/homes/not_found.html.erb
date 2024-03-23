@@ -2,10 +2,11 @@
   <h2 class="text-3xl font-bold text-slate-700 text-center my-5">Track Your Order</h2>
 </div>
 
+
 <div class="grid place-items-center">
   <%= form_with(url: track_path, method: :get) do |f| %>
 
-    <div class="flex items-center justify-between gap-4">
+    <div class="md:flex items-center justify-between gap-4">
       <div>
         <%= f.text_field :order_id, placeholder:"Order ID", required: true %>
       </div>
