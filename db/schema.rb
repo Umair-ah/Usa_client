@@ -12,29 +12,30 @@
 
 ActiveRecord::Schema[7.0].define(version: 2024_03_15_170850) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "action_text_rich_texts", force: :cascade do |t|
+  create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.uuid "record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -46,8 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_15_170850) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -64,48 +65,46 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_15_170850) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "carts", force: :cascade do |t|
+  create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "gender_id", null: false
+    t.uuid "gender_id", null: false
     t.index ["gender_id"], name: "index_categories_on_gender_id"
   end
 
-  create_table "colors", force: :cascade do |t|
+  create_table "colors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.bigint "product_id", null: false
+    t.uuid "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_colors_on_product_id"
   end
 
-  create_table "genders", force: :cascade do |t|
+  create_table "genders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "line_items", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.bigint "cart_id"
+    t.uuid "product_id", null: false
+    t.uuid "cart_id"
     t.bigint "order_id"
     t.integer "quantity", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "stock_id", null: false
-    t.bigint "color_id", null: false
-    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.uuid "stock_id", null: false
+    t.uuid "color_id", null: false
     t.index ["color_id"], name: "index_line_items_on_color_id"
     t.index ["order_id"], name: "index_line_items_on_order_id"
-    t.index ["product_id"], name: "index_line_items_on_product_id"
     t.index ["stock_id"], name: "index_line_items_on_stock_id"
   end
 
@@ -128,22 +127,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_15_170850) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "products", force: :cascade do |t|
-    t.bigint "category_id", null: false
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "category_id"
     t.string "name"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  create_table "stocks", force: :cascade do |t|
-    t.bigint "product_id", null: false
+  create_table "stocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id"
     t.string "size"
     t.integer "piece"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "color_id", null: false
+    t.uuid "color_id", null: false
     t.index ["color_id"], name: "index_stocks_on_color_id"
     t.index ["product_id"], name: "index_stocks_on_product_id"
   end
@@ -168,13 +166,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_15_170850) do
   add_foreign_key "carts", "users"
   add_foreign_key "categories", "genders"
   add_foreign_key "colors", "products"
-  add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "colors"
   add_foreign_key "line_items", "orders"
-  add_foreign_key "line_items", "products"
   add_foreign_key "line_items", "stocks"
   add_foreign_key "orders", "users"
-  add_foreign_key "products", "categories"
   add_foreign_key "stocks", "colors"
   add_foreign_key "stocks", "products"
 end
