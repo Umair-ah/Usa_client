@@ -78,7 +78,7 @@ class PaymentsController < ApplicationController
       }
     end
 
-    Stripe.api_key = 'sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPItOne2lVDSmqxUDZ4ehVJLnqAYErZvimN46h00fYFnRiOL'
+    Stripe.api_key = 'sk_test_51OxUeBB69a215LtGGMK9SwawvcieahIrqcXBCWuciBgcXCZFxCnbrFH2LYWSMVDfnRbJxZopnPmi6RnVUALXzRYL00rX43lf2Z'
     session = Stripe::Checkout::Session.create({
                 mode: 'payment',
                 line_items: line_items,
