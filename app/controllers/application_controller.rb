@@ -10,13 +10,13 @@ class ApplicationController < ActionController::Base
     elsif current_user && current_user.cart.present?
       cart = Cart.where(user_id: current_user.id).last
     elsif !current_user
-      if session[:cart_id].nil?
+      if cookies.signed[:cart_id].nil?
         cart = Cart.create
       else
-        cart = Cart.find_by(id: session[:cart_id])
+        cart = Cart.find_by(id: cookies.signed[:cart_id])
       end
     end
-    session[:cart_id] = cart.id
+    cookies.signed[:cart_id] = cart.id
     @current_cart = cart
   end
 

@@ -50,7 +50,7 @@ class PaymentsController < ApplicationController
         end
         
         new_cart = Cart.create
-        session[:cart_id] = new_cart.id
+        cookies.signed[:cart_id] = new_cart.id
         @current_cart = new_cart
       end
     end
